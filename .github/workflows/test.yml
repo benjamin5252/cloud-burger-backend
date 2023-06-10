@@ -7,11 +7,12 @@ on:
     branches:
       - main
 jobs:
-  build:
+  checkout:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+  node:
     - name: Use Node.js
       uses: actions/setup-node@v1
       with:
