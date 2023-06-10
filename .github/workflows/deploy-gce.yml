@@ -18,7 +18,7 @@ jobs:
         run: docker compose build
       - 
         name: export-docker-image
-        run: docker save -o image.tar cloud_burger_backend:tag
+        run: docker save -o image.tar cloud_burger_backend
       -
         name: ls
         run: ls
