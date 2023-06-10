@@ -13,3 +13,12 @@ jobs:
       -
         name: List dir
         run: ls
+      - 
+        name: docker-compose-build
+        run: docker compose build
+      - 
+        name: export-docker-image
+        run: docker save -o image.tar cloud_burger_backend:tag
+      -
+        name: ls
+        run: ls
