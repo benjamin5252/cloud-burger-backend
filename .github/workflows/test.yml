@@ -1,4 +1,3 @@
-yaml
 name: Cloud Burger Backend CI
 on:
   push:
