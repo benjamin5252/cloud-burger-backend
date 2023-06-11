@@ -27,5 +27,10 @@ jobs:
             USER_NAME : ${{ secrets.GCE_USER_NAME  }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 'touch github'
+          scp -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME:cloud_burger_cicd 
+          ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 
+            '
+              cd cloud_burger_cicd
+              touch github
+            '
           
