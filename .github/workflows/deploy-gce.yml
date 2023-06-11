@@ -27,3 +27,4 @@ jobs:
             USER_NAME : ${{ secrets.GCE_USER_NAME  }}
         run: 
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ls
