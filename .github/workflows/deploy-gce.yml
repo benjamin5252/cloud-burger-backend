@@ -25,6 +25,6 @@ jobs:
             PRIVATE_KEY: ${{ secrets.GCE_P_KEY  }}
             HOSTNAME : ${{ secrets.GCE_IP  }}
             USER_NAME : ${{ secrets.GCE_USER_NAME  }}
-        run: 
+        run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           ls
