@@ -27,16 +27,3 @@ jobs:
             USER_NAME : ${{ secrets.GCE_USER_NAME  }}
         run: 
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-      -
-        name: ssh
-        env:
-            PRIVATE_KEY: ${{ secrets.GCE_P_KEY  }}
-            HOSTNAME : ${{ secrets.GCE_IP  }}
-            USER_NAME : ${{ secrets.GCE_USER_NAME  }}
-        run: |
-          ssh -i private_key ${USER_NAME}@${HOSTNAME}
-          '
-            #Now we have got the access of EC2 and we will start the deploy .
-            echo "echo: in the server" > from_github
-          '
-     
