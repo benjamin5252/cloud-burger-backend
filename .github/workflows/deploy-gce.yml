@@ -27,5 +27,5 @@ jobs:
             USER_NAME : ${{ secrets.GCE_USER_NAME  }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -i private_key $USER_NAME@$HOSTNAME 'touch github'
+          ssh -i private_key -o UserKnownHostsFile=/github/home/.ssh/known_hosts $USER_NAME@$HOSTNAME 'touch github'
           
