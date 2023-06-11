@@ -20,7 +20,7 @@ jobs:
         name: export-docker-image
         run: docker save -o image.tar cloud_burger_backend
       -
-        name: echo
+        name: ssh
         env:
             PRIVATE_KEY: ${{ secrets.GCE_P_KEY  }}
             HOSTNAME : ${{ secrets.GCE_IP  }}
@@ -28,9 +28,9 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           scp -i private_key -o "StrictHostKeyChecking no" image.tar $USER_NAME@$HOSTNAME:cloud_burger_cicd 
-          # ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 
-          #   '
-          #     cd cloud_burger_cicd
-          #     touch github
-          #   '
+          ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 
+            '
+              cd cloud_burger_cicd
+              touch github
+            '
           
