@@ -20,5 +20,14 @@ jobs:
         name: export-docker-image
         run: docker save -o image.tar cloud_burger_backend
       -
-        name: ls
-        run: ls
+        name: ssh into GCE
+        env:
+            PRIVATE_KEY: ${{ secrets.GCE_P_KEY  }}
+            HOSTNAME : ${{ secrets.GCE_IP  }}
+            USER_NAME : ${{ secrets.GCE_USER_NAME  }}
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME}
+      -
+        name: In server
+        run: whoami
