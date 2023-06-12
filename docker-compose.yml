@@ -6,6 +6,5 @@ services:
       context: .
     image: cloud_burger_backend
     container_name: cloud_burger_backend
-    command: npm run start
     ports:
       - "8080:8080"

@@ -6,3 +6,5 @@ RUN npm i
 RUN npm cache clean --force
 
 EXPOSE 8080
+
+CMD [ "npm", "run", "start" ]
