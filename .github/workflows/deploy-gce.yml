@@ -28,5 +28,5 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
           scp -i private_key -o "StrictHostKeyChecking no" image.tar $USER_NAME@$HOSTNAME:cloud_burger_cicd 
-          ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 'cd cloud_burger_cicd && touch github'
+          ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 'cd cloud_burger_cicd && sudo docker load -i image.tar && sudo docker run -d -p 8080:8080 cloud_burger_backend:latest'
           
