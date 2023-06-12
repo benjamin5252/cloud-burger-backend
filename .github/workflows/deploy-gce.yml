@@ -18,7 +18,7 @@ jobs:
         run: docker compose build
       - 
         name: export-docker-image
-        run: docker save -o image.tar cloud_burger_backend
+        run: docker save -o cloud_burger_backend_image.tar cloud_burger_backend
       -
         name: ssh
         env:
@@ -27,6 +27,6 @@ jobs:
             USER_NAME : ${{ secrets.GCE_USER_NAME  }}
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          scp -i private_key -o "StrictHostKeyChecking no" image.tar $USER_NAME@$HOSTNAME:cloud_burger_cicd 
-          ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 'cd cloud_burger_cicd  && sudo docker stop cloud_burger_backend && sudo docker rm cloud_burger_backend && sudo docker image rm -f cloud_burger_backend && sudo docker load -i image.tar && sudo docker run --name="cloud_burger_backend" --restart=always -d -p 8080:8080 cloud_burger_backend:latest'
+          scp -i private_key -o "StrictHostKeyChecking no" cloud_burger_backend_image.tar $USER_NAME@$HOSTNAME:cloud_burger_cicd 
+          ssh -i private_key -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME 'cd cloud_burger_cicd  && sudo docker stop cloud_burger_backend && sudo docker rm cloud_burger_backend && sudo docker image rm -f cloud_burger_backend && sudo docker load -i cloud_burger_backend_image.tar && sudo docker run --name="cloud_burger_backend" --restart=always -d -p 8080:8080 cloud_burger_backend:latest'
           
