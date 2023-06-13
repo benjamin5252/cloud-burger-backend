@@ -7,4 +7,4 @@ services:
     image: cloud_burger_backend
     container_name: cloud_burger_backend
     ports:
-      - "8080:8080"
+      - "80:8080"
